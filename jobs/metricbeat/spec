@@ -8,6 +8,7 @@ templates:
   config/metricbeat.yml: config/metricbeat.yml
   config/modules.d/kafka.yml.disabled: config/modules.d/kafka.yml.disabled
   config/modules.d/zookeeper.yml.disabled: config/modules.d/zookeeper.yml.disabled
+  config/modules.d/redis.yml.disabled: config/modules.d/redis.yml.disabled
   config/modules.d/system.yml: config/modules.d/system.yml
 
 packages: 
@@ -25,6 +26,9 @@ consumes:
   optional: true
 - name: zookeeper
   type: zookeeper
+  optional: true
+- name: redis
+  type: redis
   optional: true
 
 properties:

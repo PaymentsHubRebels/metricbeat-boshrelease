@@ -48,6 +48,20 @@ describe 'metricbeat job' do
     )
   }
 
+  let(:redis_link) {
+    Bosh::Template::Test::Link.new(
+      name: 'redis',
+      instances: [
+        Bosh::Template::Test::LinkInstance.new(address: '1.2.3.4')
+      ],
+      properties: {
+        'password' => 'asdf1234',
+        'port' => 4321,
+        'base_dir' => '/redis'
+      }
+    )
+  }
+
   describe 'metricbeat.yml' do
     let(:template) { job.template('config/metricbeat.yml') }
 
@@ -62,15 +76,6 @@ describe 'metricbeat job' do
       )
     )
     expect(config['name']).to eq('test_name')
-    end
-
-    it 'configures the shipper name properly by default getting info from BOSH context' do 
-      config = YAML.load(template.render(
-        {},
-        consumes: []
-      )
-    )
-    expect(config['name']).to eq('my-deployment/me/0')
     end
 
     it 'configures elastic search hosts from properties succesfully' do
@@ -228,6 +233,31 @@ describe 'metricbeat job' do
       )
       expect(config.first['module']).to eq('zookeeper')
       expect(config.first['hosts']).to eq(['10.0.1.1:2181','10.0.1.2:2181', '10.0.1.3:2181'])
+    end
+  end
+  
+  describe 'config/modules.d/redis.yml.disabled' do
+    let(:template) { job.template('config/modules.d/redis.yml.disabled') }
+    it 'loads defaults for redis module' do
+      config = YAML.load(template.render(
+          {},
+          consumes: []
+        )
+      )
+      # my.bosh.com is spec.address is default in this test library
+      expect(config.first['module']).to eq('redis')
+      expect(config.first).not_to have_key('password')
+    end
+
+    it 'loads defaults for redis module' do
+      config = YAML.load(template.render(
+        {},
+        consumes: [redis_link]
+      ))
+      # my.bosh.com is spec.address is default in this test library
+      expect(config.first['module']).to eq('redis')
+      expect(config.first.dig('password')).to eq('asdf1234')
+      expect(config.first.dig('hosts')).to eq(['1.2.3.4:4321'])
     end
   end
 end

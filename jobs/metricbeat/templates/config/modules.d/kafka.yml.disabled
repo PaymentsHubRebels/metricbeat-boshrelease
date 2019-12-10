@@ -3,13 +3,13 @@
 
 <%
   kafka_hosts = [spec.address]
-  
-  if_link("kafka") do |kafka_link| 
+
+  if_link("kafka") do |kafka_link|
     kafka_hosts = []
     kafka_link.instances.each do |instance|
       kafka_hosts << instance.address
     end
-  end  
+  end
 %>
 
 - module: kafka
