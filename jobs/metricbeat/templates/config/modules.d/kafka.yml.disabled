@@ -1,26 +1,14 @@
 # Module: kafka
 # Docs: https://www.elastic.co/guide/en/beats/metricbeat/7.4/metricbeat-module-kafka.html
 
-<%
-  kafka_hosts = [spec.address]
-
-  if_link("kafka") do |kafka_link|
-    kafka_hosts = []
-    kafka_link.instances.each do |instance|
-      kafka_hosts << instance.address
-    end
-  end
-%>
-
 - module: kafka
   #metricsets:
   #  - partition
   #  - consumergroup
   period: 10s
   hosts:
-  <% kafka_hosts.each do |host| -%>
-<%="- #{host}:#{p('metricbeat.modules.kafka.port')}" %>
-  <% end -%>
+  - <%= "#{spec.address}:#{p('metricbeat.modules.kafka.port')}" %>
+
   #client_id: metricbeat
   #retries: 3
   #backoff: 250ms

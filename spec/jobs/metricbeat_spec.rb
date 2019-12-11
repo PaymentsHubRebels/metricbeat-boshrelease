@@ -192,7 +192,7 @@ describe 'metricbeat job' do
         )
       )
       expect(config.first['module']).to eq('kafka')
-      expect(config.first['hosts']).to eq(['10.0.0.1:9092','10.0.0.2:9092', '10.0.0.3:9092'])
+      expect(config.first['hosts']).to eq(["my.bosh.com:9092"])
     end
   end
 
@@ -232,7 +232,7 @@ describe 'metricbeat job' do
         )
       )
       expect(config.first['module']).to eq('zookeeper')
-      expect(config.first['hosts']).to eq(['10.0.1.1:2181','10.0.1.2:2181', '10.0.1.3:2181'])
+      expect(config.first['hosts']).to eq(["my.bosh.com:2181"])
     end
   end
   
@@ -257,7 +257,7 @@ describe 'metricbeat job' do
       # my.bosh.com is spec.address is default in this test library
       expect(config.first['module']).to eq('redis')
       expect(config.first.dig('password')).to eq('asdf1234')
-      expect(config.first.dig('hosts')).to eq(['1.2.3.4:4321'])
+      expect(config.first.dig('hosts')).to eq(['my.bosh.com:4321'])
     end
   end
 end

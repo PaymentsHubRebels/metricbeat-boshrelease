@@ -2,13 +2,9 @@
 # Docs: https://www.elastic.co/guide/en/beats/metricbeat/7.4/metricbeat-module-redis.html
 
 <%
-  redis_hosts = [spec.address]
-
+  redis_port = "6379"
   if_link("redis") do |redis_link|
-    redis_hosts = []
-    redis_link.instances.each do |instance|
-      redis_hosts << instance.address + ":" + redis_link.properties.dig('port').to_s
-    end
+    redis_port = redis_link.properties.dig('port').to_s
   end
 %>
 
@@ -19,7 +15,8 @@
   period: 10s
 
   # Redis hosts
-  hosts: <%= redis_hosts -%>
+  hosts:
+  - <%= "#{spec.address}:#{redis_port}" -%>
 
   # Network type to be used for redis connection. Default: tcp
   #network: tcp

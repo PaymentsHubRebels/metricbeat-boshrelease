@@ -1,24 +1,10 @@
 # Module: zookeeper
 # Docs: https://www.elastic.co/guide/en/beats/metricbeat/7.4/metricbeat-module-zookeeper.html
 
-<%
-  zookeeper_hosts = [spec.address]
-  
-  if_link("zookeeper") do |zookeeper_link| 
-    zookeeper_hosts = []
-    zookeeper_link.instances.each do |instance|
-      zookeeper_hosts << instance.address
-    end
-  end  
-%>
-
-
 - module: zookeeper
   #metricsets:
   #  - mntr
   #  - server
   period: 10s
   hosts:
-  <% zookeeper_hosts.each do |host| -%>
-<%="- #{host}:#{p('metricbeat.modules.zookeeper.port')}" %>
-  <% end -%>
+  - <%= "#{spec.address}:#{p('metricbeat.modules.zookeeper.port')}" %>
