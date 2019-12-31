@@ -10,6 +10,7 @@ templates:
   config/modules.d/zookeeper.yml.disabled: config/modules.d/zookeeper.yml.disabled
   config/modules.d/redis.yml.disabled: config/modules.d/redis.yml.disabled
   config/modules.d/system.yml: config/modules.d/system.yml
+  config/metricbeat_ilm_policy.json: config/metricbeat_ilm_policy.json
 
 packages: 
 - metricbeat
@@ -64,3 +65,33 @@ properties:
   metricbeat.modules.zookeeper.port:
     description: "Zookeeper hosts port"
     default: 2181
+  metricbeat.ilm.enabled:
+    description: "Enables or disables index lifecycle management on any new indices created by Metricbeat. Valid values are true, false, and auto. When auto (the default) is specified on version 7.0 and later, Metricbeat automatically uses index lifecycle management if the feature is enabled in Elasticsearch and has the required license; otherwise, Metricbeat creates daily indices."
+    default: auto
+  metricbeat.ilm.rollover_alias:
+    description: "The index lifecycle write alias name. The default is metricbeat-%{[agent.version]}. Setting this option changes the alias name."
+    default: "metricbeat-%{[agent.version]}"
+  metricbeat.ilm.pattern:
+    description: "The rollover index pattern. The default is %{now/d}-000001."
+    default: "%{now/d}-000001"
+  metricbeat.ilm.policy_name:
+    description: "The name to use for the lifecycle policy. The default is metricbeat-%{[agent.version]}."
+    default: "metricbeat-%{[agent.version]}"
+  metricbeat.ilm.check_exists:
+    description: "When set to false, disables the check for an existing lifecycle policy. The default is true. You need to disable this check if the Metricbeat user connecting to a secured cluster doesn’t have the read_ilm privilege."
+    default: false
+  metricbeat.ilm.overwrite:
+    description: "When set to true, the lifecycle policy is overwritten at startup. The default is false."
+    default: true
+  metricbeat.ilm.policy:
+    description: "a hash with the structure explained in https://www.elastic.co/guide/en/elasticsearch/reference/7.4/getting-started-index-lifecycle-management.html"
+    default:
+      policy: 
+        phases: 
+          hot: 
+            min_age: 0ms
+            actions: 
+          delete: 
+            min_age: 7d
+            actions: 
+              delete: 
