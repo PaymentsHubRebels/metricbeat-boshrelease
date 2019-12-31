@@ -90,8 +90,8 @@ properties:
         phases: 
           hot: 
             min_age: 0ms
-            actions: 
+            actions: []
           delete: 
             min_age: 7d
             actions: 
-              delete: 
+              delete: {}
