@@ -35,6 +35,9 @@ consumes:
 properties:
   metricbeat.name:
     description: "Name to display in Infrastructure App in Kibana. By default this information is fetch from BOSH Context."
+  metricbeat.version:
+    description: "Metricbeat version"
+    default: 7.4.1
   metricbeat.elasticsearch.hosts:
     description: "Elastic Search master nodes host/ip to connect with"
     default: []
