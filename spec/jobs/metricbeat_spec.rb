@@ -70,6 +70,9 @@ describe 'metricbeat job' do
       config = YAML.load(template.render(
         {
           'metricbeat' => {
+            'elasticsearch' => {
+              'port' => 1234
+            },
             'name' => 'test_name'
           } 
         },
@@ -83,7 +86,6 @@ describe 'metricbeat job' do
       config = YAML.load(template.render(
           {
             'metricbeat' => {
-              'name' => 'test_name',
               'elasticsearch' => {
                 'protocol' => 'https',
                 'port' => 1234,
@@ -105,10 +107,9 @@ describe 'metricbeat job' do
       config = YAML.load(template.render(
           {
             'metricbeat' => {
-              'name' => 'test_name',
               'elasticsearch' => {
                 'protocol' => 'https',
-                'port' => 1234,
+                'port' => 1234
               }
             } 
           },
@@ -126,14 +127,13 @@ describe 'metricbeat job' do
       config = YAML.load(template.render(
           {
             'metricbeat' => {
-              'name' => 'test_name',
               'elasticsearch' => {
                 'protocol' => 'https',
-                'port' => 1234,
+                'port' => 1234
               },
               'kibana' => {
                 'protocol' => 'https',
-                'port' => 443,
+                'port' => 443
               }
             }
           },
@@ -146,10 +146,9 @@ describe 'metricbeat job' do
       config = YAML.load(template.render(
           {
             'metricbeat' => {
-              'name' => 'test_name',
               'elasticsearch' => {
                 'protocol' => 'https',
-                'port' => 1234,
+                'port' => 1234
               }
             }
           },
@@ -161,7 +160,9 @@ describe 'metricbeat job' do
     it 'configures ILM policies options by default' do
       config = YAML.load(template.render({
         'metricbeat' => {
-          'name' => 'test_name',
+          'elasticsearch' => {
+            'port' => 1234
+          }
         }
       }))
   
