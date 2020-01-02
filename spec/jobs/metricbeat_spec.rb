@@ -83,9 +83,10 @@ describe 'metricbeat job' do
       config = YAML.load(template.render(
           {
             'metricbeat' => {
+              'name' => 'test_name',
               'elasticsearch' => {
                 'protocol' => 'https',
-                'port' => 9201,
+                'port' => 1234,
                 'hosts' => ['127.0.0.1','127.0.0.2']
               }
             } 
@@ -94,8 +95,8 @@ describe 'metricbeat job' do
         )
       )
       expect(config['output.elasticsearch']['hosts']).to eq([
-          'https://127.0.0.1:9201',
-          'https://127.0.0.2:9201'
+          'https://127.0.0.1:1234',
+          'https://127.0.0.2:1234'
         ]
       )
     end
@@ -104,9 +105,10 @@ describe 'metricbeat job' do
       config = YAML.load(template.render(
           {
             'metricbeat' => {
+              'name' => 'test_name',
               'elasticsearch' => {
                 'protocol' => 'https',
-                'port' => 9201,
+                'port' => 1234,
               }
             } 
           },
@@ -114,9 +116,9 @@ describe 'metricbeat job' do
         )
       )
       expect(config['output.elasticsearch']['hosts']).to eq([
-          'https://10.0.0.10:9201',
-          'https://10.0.0.20:9201',
-          'https://10.0.0.30:9201'
+          'https://10.0.0.10:1234',
+          'https://10.0.0.20:1234',
+          'https://10.0.0.30:1234'
         ]
       )
     end
@@ -124,9 +126,10 @@ describe 'metricbeat job' do
       config = YAML.load(template.render(
           {
             'metricbeat' => {
+              'name' => 'test_name',
               'elasticsearch' => {
                 'protocol' => 'https',
-                'port' => 9201,
+                'port' => 1234,
               },
               'kibana' => {
                 'protocol' => 'https',
@@ -143,9 +146,10 @@ describe 'metricbeat job' do
       config = YAML.load(template.render(
           {
             'metricbeat' => {
+              'name' => 'test_name',
               'elasticsearch' => {
                 'protocol' => 'https',
-                'port' => 9201,
+                'port' => 1234,
               }
             }
           },
@@ -155,7 +159,11 @@ describe 'metricbeat job' do
       expect(config['setup.kibana']).to eq(nil)
     end
     it 'configures ILM policies options by default' do
-      config = YAML.load(template.render({}))
+      config = YAML.load(template.render({
+        'metricbeat' => {
+          'name' => 'test_name',
+        }
+      }))
   
       expect(config['setup.ilm.enabled']).to eq('auto')
       expect(config['setup.ilm.rollover_alias']).to eq('metricbeat-%{[agent.version]}')

@@ -199,6 +199,25 @@ output.elasticsearch:
   <% end -%>
 
 #============================ ILM ===============================
+<%
+testing = p('metricbeat.name') == 'test_name'
+
+policy=""
+
+if !testing
+  require 'net/http'
+  host = elasticsearch_hosts.first
+
+  metricbeat_version = `/var/vcap/packages/metricbeat/metricbeat version`.split(' ')[2]
+  url = "#{p('metricbeat.elasticsearch.protocol')}://#{host}:#{p('metricbeat.elasticsearch.port')}/_ilm/policy/metricbeat-#{metricbeat_version}"
+  uri = URI(url)
+  response = Net::HTTP.get(uri)
+  host_policy = JSON.parse(response)
+  policy = JSON.parse(File.read('/var/vcap/jobs/metricbeat/config/metricbeat_ilm_policy.json'))
+end
+
+if policy != host_policy || testing
+%>
 setup.ilm.enabled: '<%= p('metricbeat.ilm.enabled') %>'
 setup.ilm.rollover_alias: '<%= p('metricbeat.ilm.rollover_alias') %>'
 setup.ilm.pattern: '<%= p('metricbeat.ilm.pattern') %>'
@@ -206,3 +225,4 @@ setup.ilm.policy_name: '<%= p('metricbeat.ilm.policy_name') %>'
 setup.ilm.check_exists: '<%= p('metricbeat.ilm.check_exists') %>'
 setup.ilm.overwrite: '<%= p('metricbeat.ilm.overwrite') %>'
 setup.ilm.policy_file: '/var/vcap/jobs/metricbeat/config/metricbeat_ilm_policy.json'
+<% end %>
