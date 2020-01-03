@@ -209,7 +209,8 @@ if !testing
   require 'net/http'
   host = elasticsearch_hosts.first
 
-  url = "#{p('metricbeat.elasticsearch.protocol')}://#{host}:#{p('metricbeat.elasticsearch.port')}/_ilm/policy/metricbeat-#{p('metricbeat.version')}"
+  metricbeat_version = `/var/vcap/packages/metricbeat/metricbeat version`.split(' ')[2]
+  url = "#{p('metricbeat.elasticsearch.protocol')}://#{host}:#{p('metricbeat.elasticsearch.port')}/_ilm/policy/metricbeat-#{metricbeat_version}"
   uri = URI(url)
   response = Net::HTTP.get(uri)
   host_policy = JSON.parse(response)
