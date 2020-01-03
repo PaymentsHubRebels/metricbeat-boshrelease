@@ -197,12 +197,3 @@ output.elasticsearch:
   <% elasticsearch_hosts.each do |host| -%>
 <%="- #{p('metricbeat.elasticsearch.protocol')}://#{host}:#{p('metricbeat.elasticsearch.port')}" %>
   <% end -%>
-
-#============================ ILM ===============================
-setup.ilm.enabled: '<%= p('metricbeat.ilm.enabled') %>'
-setup.ilm.rollover_alias: '<%= p('metricbeat.ilm.rollover_alias') %>'
-setup.ilm.pattern: '<%= p('metricbeat.ilm.pattern') %>'
-setup.ilm.policy_name: '<%= p('metricbeat.ilm.policy_name') %>'
-setup.ilm.check_exists: '<%= p('metricbeat.ilm.check_exists') %>'
-setup.ilm.overwrite: '<%= p('metricbeat.ilm.overwrite') %>'
-setup.ilm.policy_file: '/var/vcap/jobs/metricbeat/config/metricbeat_ilm_policy.json'

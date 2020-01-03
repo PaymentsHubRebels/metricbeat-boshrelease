@@ -1,6 +1,5 @@
 require 'rspec'
 require 'yaml'
-require 'json'
 require 'bosh/template/test'
 
 describe 'metricbeat job' do
@@ -154,16 +153,6 @@ describe 'metricbeat job' do
       )
       expect(config['setup.kibana']).to eq(nil)
     end
-    it 'configures ILM policies options by default' do
-      config = YAML.load(template.render({}))
-  
-      expect(config['setup.ilm.enabled']).to eq('auto')
-      expect(config['setup.ilm.rollover_alias']).to eq('metricbeat-%{[agent.version]}')
-      expect(config['setup.ilm.pattern']).to eq('%{now/d}-000001')
-      expect(config['setup.ilm.policy_name']).to eq('metricbeat-%{[agent.version]}')
-      expect(config['setup.ilm.check_exists']).to eq('false')
-      expect(config['setup.ilm.overwrite']).to eq('true')
-    end
   end
 
   describe 'config/modules.d/kafka.yml.disabled' do
@@ -269,15 +258,6 @@ describe 'metricbeat job' do
       expect(config.first['module']).to eq('redis')
       expect(config.first.dig('password')).to eq('asdf1234')
       expect(config.first.dig('hosts')).to eq(['my.bosh.com:4321'])
-    end
-  end
-  describe 'config/metricbeat_ilm_policy.json' do
-    let(:template) { job.template('config/metricbeat_ilm_policy.json') }
-
-    it 'renders the policy from a given policy hash' do
-      policy = JSON.load(template.render({}))
-
-      expect(policy['policy']['phases']['delete']['min_age']).to eq '7d'
     end
   end
 end

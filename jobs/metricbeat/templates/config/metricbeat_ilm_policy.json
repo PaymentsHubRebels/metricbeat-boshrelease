@@ -1,1 +1,0 @@
-<%= p('metricbeat.ilm.policy').to_json.to_s %>
