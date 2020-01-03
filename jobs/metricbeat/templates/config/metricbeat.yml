@@ -200,8 +200,13 @@ output.elasticsearch:
 
 #============================ ILM ===============================
 <%
+metricbeat_name = ""
 
-testing = p('metricbeat.elasticsearch.port') == 1234
+if if_p('metricbeat.name')
+  metricbeat_name = p('metricbeat.name')
+end
+
+testing = metricbeat_name == 'test_name'
 
 policy=""
 
