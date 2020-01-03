@@ -200,7 +200,7 @@ output.elasticsearch:
 
 #============================ ILM ===============================
 <%
-testing = if_p('metricbeat.name') && p('metricbeat.name') == 'test_name'
+testing = p('metricbeat.name') == 'test_name'
 
 policy=""
 
