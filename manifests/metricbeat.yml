@@ -9,15 +9,16 @@ instance_groups:
   networks:
     - name: default
   jobs:
-   name: metricbeat
-   release: metricbeat
-   properties:
-    modules:
-      enabled: []
-    kibana:
-      host: ((kibana_host))
-    elasticsearch:
-      hosts: ((elasticsearch_hosts))
+   - name: metricbeat
+     release: metricbeat
+     properties:
+       metricbeat:
+         modules:
+           enabled: []
+         kibana:
+           host: ((kibana_host))
+         elasticsearch:
+           hosts: ((elasticsearch_hosts))
 update:
   canaries: 0
   max_in_flight: 1
