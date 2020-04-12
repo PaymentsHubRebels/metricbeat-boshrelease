@@ -21,7 +21,7 @@ function setup_dashboards {
 
 function main {
     enable_modules
-    setup_dashboards
+#    setup_dashboards
 }
 
 main
