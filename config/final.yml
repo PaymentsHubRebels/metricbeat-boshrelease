@@ -1,5 +1,7 @@
 name: metricbeat
 blobstore:
-  provider: local
+  provider: s3
   options:
-    blobstore_path: /tmp/metricbeat-blobs
+    bucket_name: metricbeat-boshrelease-blobstore
+    region: eu-west-2
+    host: s3-eu-west-2.amazonaws.com
