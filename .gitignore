@@ -12,5 +12,4 @@ releases/**/*.tgz
 *~
 *#
 #*
-.downloads
 Gemfile.lock
