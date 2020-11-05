@@ -4,4 +4,4 @@ blobstore:
   options:
     bucket_name: metricbeat-boshrelease-blobstore
     region: eu-west-2
-    host: s3-eu-west-2.amazonaws.com
+    credentials_source: env_or_profile
