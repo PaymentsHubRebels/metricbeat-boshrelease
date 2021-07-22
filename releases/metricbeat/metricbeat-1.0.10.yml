@@ -1,0 +1,17 @@
+name: metricbeat
+version: 1.0.10
+commit_hash: 3fb1d26
+uncommitted_changes: false
+jobs:
+- name: metricbeat
+  version: d146b2c49724f5b7ca0b53060d79eae81781492df3f83572e4cf9b086baa2929
+  fingerprint: d146b2c49724f5b7ca0b53060d79eae81781492df3f83572e4cf9b086baa2929
+  sha1: sha256:3d44819ef95a4128c9c14481beb3060e37ffc3e2c4b1786c74f96462dfca1fb0
+  packages:
+  - metricbeat
+packages:
+- name: metricbeat
+  version: 2e72e74da29f161c75a273d1b49de6a70895c3ead339763819bbbd0680d776b9
+  fingerprint: 2e72e74da29f161c75a273d1b49de6a70895c3ead339763819bbbd0680d776b9
+  sha1: sha256:ba3fbdd6cc14fddb509436e18e67a9052288562d720999efede7eb11761d3703
+  dependencies: []
