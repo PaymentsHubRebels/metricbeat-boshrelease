@@ -1,3 +1,3 @@
 set -e
 
-tar xzf metricbeat/metricbeat-7.13.3.tar.gz -C $BOSH_INSTALL_TARGET --strip-components 1
+tar xzf metricbeat/metricbeat-x7.13.3.tar.gz -C $BOSH_INSTALL_TARGET --strip-components 1
