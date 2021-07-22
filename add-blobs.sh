@@ -3,7 +3,7 @@
 THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 DOWNLOAD_FOLDER="$THIS_SCRIPT_DIR/.downloads"
 
-METRICBEAT_VERSION="7.9.0"
+METRICBEAT_VERSION="7.13.3"
 BLOB_FILENAME="metricbeat-$METRICBEAT_VERSION.tar.gz"
 METRICBEAT_DOWNLOAD_URL="https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-$METRICBEAT_VERSION-linux-x86_64.tar.gz"
 

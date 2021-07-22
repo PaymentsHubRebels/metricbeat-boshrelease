@@ -1,4 +1,4 @@
-metricbeat/metricbeat-7.9.0.tar.gz:
-  size: 38796207
-  object_id: bcb16545-be62-4535-6ffd-859a236fc983
-  sha: sha256:2e45babcf8bc5d4785bbcc2e1c9d2384b43d1a0ec122de2459cc2d4d88035e23
+metricbeat/metricbeat-7.13.3.tar.gz:
+  size: 43530969
+  object_id: 097e89ba-2228-4eb1-71d7-670abc1a8574
+  sha: sha256:8fe52c1c45cb36300d5700393cb84afd1183a807d2f2951ebedaa2c7014f44e4

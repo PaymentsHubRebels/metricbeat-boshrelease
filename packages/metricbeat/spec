@@ -4,4 +4,4 @@ name: metricbeat
 dependencies: []
 
 files:
-- metricbeat/metricbeat-7.9.0.tar.gz 
+- metricbeat/metricbeat-7.13.3.tar.gz
